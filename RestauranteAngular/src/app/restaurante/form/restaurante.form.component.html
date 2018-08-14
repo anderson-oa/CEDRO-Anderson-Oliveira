@@ -1,0 +1,44 @@
+<form [formGroup]="formData" (ngSubmit)="onSubmit(formData)" class="page">
+  <div class="page-fields">
+    <div class="container">
+      <h2 class="title has-text-grey">{{ title }}</h2>        
+      <hr/>      
+      <div class="field">        
+        <label class="label" for="nome">Nome<em>*</em></label>
+        <div class="control">          
+          <input type="text" 
+                 id="nome" 
+                 class="input" 
+                 [ngClass]="{'is-danger':!formData.controls['nome'].valid && formData.controls['nome'].touched}"
+                 [formControl]="formData.controls['nome']"
+                 autocomplete="off"
+                 autofocus />
+        </div>
+        <span *ngIf="formData.controls['nome'].hasError('required') && formData.controls['nome'].touched" class="help is-danger">
+          Campo é obrigatório.
+        </span>
+        <span *ngIf="formData.controls['nome'].hasError('minlength') && formData.controls['nome'].touched" class="help is-danger">
+          Campo deve ter pelo menos 2 caracteres.
+        </span>
+        <span *ngIf="formData.controls['nome'].hasError('maxlength') && formData.controls['nome'].touched" class="help is-danger">
+          Campo deve ter no máximo 200 caracteres.
+        </span>
+      </div>    
+    </div>
+  </div>
+  <div class="page-faixa">
+    <div class="container">
+      <a class="button is-back" (click)="goToIndex()">
+          <span class="icon">
+            <i class="fas fa-arrow-left fa-2x"></i>
+          </span>
+      </a>
+    </div>
+    <button type="submit" class="button is-success is-submit" [disabled]="!formData.valid" data-tooltip="Confirmar">
+        <span class="icon">
+          <i class="fas fa-check"></i>
+        </span>
+    </button>  
+  </div>
+</form>
+<app-spinner *ngIf="spinner"></app-spinner>

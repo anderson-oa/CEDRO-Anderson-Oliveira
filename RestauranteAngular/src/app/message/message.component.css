@@ -1,0 +1,11 @@
+.message{  
+  position: absolute;
+  top: -50%;
+  left: 1rem;
+  right: 1rem;
+  z-index: 1500;
+  transition: top .3s ease-in-out;
+}
+.message.visible{  
+  top: 1rem;
+}

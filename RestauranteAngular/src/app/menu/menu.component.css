@@ -1,0 +1,71 @@
+.navbar{
+  border-bottom: 1px solid #ddd; 
+}
+
+.navbar > .container {
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 3.25rem;
+  width: 100%;
+}
+
+.navbar .navbar-start{
+  justify-content: flex-start !important;
+  margin-right: auto !important;
+}
+
+.navbar .navbar-start span{
+  font-size: 30px;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+.navbar .navbar-end{
+  justify-content: flex-end !important;
+  margin-left: auto !important;
+}
+
+.navbar .navbar-end a.navbar-item{
+  height: 100%;
+  padding: .9rem 1.5em;
+}
+
+.panel{
+  background-color: #474787;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -100%;
+  z-index: 1000;
+  transition: bottom .3s ease-in-out;
+}
+
+.panel.visible {
+  bottom: 0;
+}
+
+.panel .panel-block{
+  transition: background-color .3s ease-in;
+}
+.panel .panel-block:hover{
+  background-color: #574b90;
+}
+
+.panel .panel-block img{
+  width: 145px;
+  height: 145px;
+  padding: 10px;
+  margin-right: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.panel .panel-block .title  {
+  color: #fff;
+}
+
+.panel .panel-block .subtitle {
+  color: rgba(255,255,255,.5);
+}

@@ -1,0 +1,7 @@
+<div [ngClass]="['message', message.show]">
+  <div class="message-header">
+    <p class="is-uppercase">{{ message.title }}</p>
+    <button class="delete" aria-label="delete" (click)="message.hide()"></button>
+  </div>
+  <div class="message-body">{{ message.text }}</div>
+</div>

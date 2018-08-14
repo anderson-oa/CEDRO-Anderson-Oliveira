@@ -1,0 +1,61 @@
+<div class="page">
+  <div class="page-search">
+    <div class="container">
+      <div class="control has-icons-right">
+        <input class="input is-large" type="text" placeholder="Pesquisar..." (keyup)="filter($event)"/>    
+        <span class="icon is-medium is-right">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="page-table">
+    <div class="container">                  
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th colspan="2" class="pl-0">Restaurante</th>
+          </tr>
+        </thead>  
+        <tbody>
+          <tr *ngFor="let restaurante of restaurantes | restauranteFilter:toFilter">
+            <td>{{ restaurante.nome }}</td>
+            <td class="has-text-centered td-last-w-130">
+              <a class="button" [routerLink]="['edit', restaurante.restauranteId]" data-tooltip="Editar">
+                  <span class="icon">
+                    <i class="fas fa-edit"></i>
+                  </span>
+              </a>           
+              <a class="button" (click)="confirme(restaurante)" data-tooltip="Deletar">
+                  <span class="icon">
+                    <i class="fas fa-trash-alt"></i>
+                  </span>
+              </a>
+            </td>
+          </tr>                 
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="page-faixa">
+    <a class="button is-link is-main" [routerLink]="['add']" data-tooltip="Adicionar">
+        <span class="icon">
+          <i class="fas fa-plus"></i>
+        </span>
+    </a>  
+  </div>
+</div>
+<div class="modal" [ngClass]="{'is-active': modal}">
+  <div class="modal-background"></div>
+  <div class="modal-content">            
+    <h2 class="title is-4 has-text-centered has-text-white">Confirmar exclusão do restaurante ?</h2>
+    <div class="is-grouped has-text-centered">
+      <a class="button is-medium is-success" style="margin-right:10px" (click)="delete(toDelete.restauranteId)">
+        <span class="icon"><i class="fas fa-check"></i></span>
+        <span>Sim</span>
+      </a>       
+      <a class="button is-medium is-danger" (click)="close()">Não</a>
+    </div>     
+  </div>
+</div>
+<app-spinner *ngIf="spinner"></app-spinner>

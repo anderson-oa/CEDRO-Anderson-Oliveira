@@ -1,0 +1,66 @@
+<div class="page">
+    <div class="page-search">
+      <div class="container">
+        <div class="control has-icons-right">
+          <input class="input is-large" type="text" placeholder="Pesquisar..." (keyup)="filter($event)"/>    
+          <span class="icon is-medium is-right">
+            <i class="fas fa-search"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="page-table">
+      <div class="container">                  
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th class="pl-0">Restaurante</th>
+              <th>Prato</th>
+              <th>Preço</th>
+              <th></th>
+            </tr>
+          </thead>  
+          <tbody>
+            <tr *ngFor="let prato of pratos | pratoFilter:toFilter">
+              <td>{{ prato.restaurante.nome }}</td>
+              <td>{{ prato.nome }}</td>              
+              <td>{{prato.preco |  currency:'BRL':true:'1.2-2' }}</td>
+              <td class="has-text-centered td-last-w-130">
+                <a class="button" [routerLink]="['edit', prato.pratoId]" data-tooltip="Editar">
+                    <span class="icon">
+                      <i class="fas fa-edit"></i>
+                    </span>
+                </a>           
+                <a class="button" (click)="confirme(prato)" data-tooltip="Deletar">
+                    <span class="icon">
+                      <i class="fas fa-trash-alt"></i>
+                    </span>
+                </a>
+              </td>
+            </tr>                 
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="page-faixa">
+      <a class="button is-link is-main" [routerLink]="['add']" data-tooltip="Adicionar">
+          <span class="icon">
+            <i class="fas fa-plus"></i>
+          </span>
+      </a>  
+    </div>
+  </div>
+  <div class="modal" [ngClass]="{'is-active': modal}">
+    <div class="modal-background"></div>
+    <div class="modal-content">            
+      <h2 class="title is-4 has-text-centered has-text-white">Confirmar exclusão do prato ?</h2>
+      <div class="is-grouped has-text-centered">
+        <a class="button is-medium is-success" style="margin-right:10px" (click)="delete(toDelete.pratoId)">
+          <span class="icon"><i class="fas fa-check"></i></span>
+          <span>Sim</span>
+        </a>       
+        <a class="button is-medium is-danger" (click)="close()">Não</a>
+      </div>     
+    </div>
+  </div>
+  <app-spinner *ngIf="spinner"></app-spinner>

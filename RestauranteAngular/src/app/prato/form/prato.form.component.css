@@ -1,0 +1,30 @@
+.page > .page-fields{  
+  height: calc(100% - 60px);
+  overflow-x: hidden;
+}
+
+.page > .page-fields > .container{
+  padding: 1.5em;
+}
+
+.page > .page-faixa .is-back{
+  background: transparent;
+  border: none;
+  color: #fff;
+  margin: 12px 10px;
+}
+
+.page > .page-faixa .is-submit{
+  padding: 7px 22px;
+  font-size: 2.5rem;
+  border-radius: 50%;
+  border: 10px solid #fff;
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+}
+
+label.label em {
+  color: red;
+}

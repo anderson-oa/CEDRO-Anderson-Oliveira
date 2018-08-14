@@ -1,0 +1,28 @@
+<nav class="navbar is-light">
+  <div class="container">
+    <div class="navbar-start">
+      <span class="navbar-item is-uppercase">{{ title }}</span>
+    </div>
+    <div class="navbar-end">
+      <a class="navbar-item" [routerLink]='["/"]'>
+          <i class="fas fa-home fa-2x"></i>
+      </a>
+    </div>
+  </div>
+</nav>
+<nav class="panel" [ngClass]='{ "visible": isOpen }'>        
+  <a class="panel-block" [routerLink]='["restaurantes"]'>
+      <img [src]="imgRestaurante" />
+      <div>
+        <b class="title is-3 is-spaced">Restaurantes</b><br />
+        <span class="subtitle is-5">Gerenciamento da informações dos restaurantes</span>
+      </div>
+  </a>
+  <a class="panel-block" [routerLink]='["pratos"]'>
+      <img [src]="imgPrato" />     
+      <div>
+          <b class="title is-3 is-spaced">Pratos</b><br />
+          <span class="subtitle is-5 ">Gerenciamento da informações dos pratos</span>     
+      </div>
+  </a>   
+</nav>
