@@ -8,8 +8,10 @@ import { Prato } from '../../domain/prato/prato';
 
 export class PratoFilterPipe implements PipeTransform {
     transform(items: Prato[], filter: Prato): any {  
-        if (!items || !filter) return items;  
-        return items.filter(item => (item.nome.indexOf(filter.nome) !== -1 
-                                  || item.restaurante.nome.indexOf(filter.nome) !== -1));  
+        if (!items || !filter) return items;
+        return items.filter(item => {
+            var text = `${item.restaurante.nome} ${item.nome}`;            
+            return text.indexOf(filter.nome) !== -1 ? item : null;
+        });
     }  
 }
