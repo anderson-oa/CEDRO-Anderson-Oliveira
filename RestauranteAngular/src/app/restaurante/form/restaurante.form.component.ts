@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Restaurante } from '../../../domain/restaurante/restaurante';
 import { RestauranteService } from '../../../domain/restaurante/restaurante-sevice';
@@ -10,7 +10,7 @@ import { RestauranteService } from '../../../domain/restaurante/restaurante-sevi
   styleUrls: ['./restaurante.form.component.css']
 })
 
-export class RestauranteFormComponent {  
+export class RestauranteFormComponent {
 
   public spinner: boolean = false;
 
@@ -33,17 +33,18 @@ export class RestauranteFormComponent {
       nome: [this.model.nome, [Validators.required, Validators.minLength(2), Validators.maxLength(200)]]
     });
 
-    let id = this.route.snapshot.paramMap.get('id');
-
-    if (id) {
-      this._restauranteService.getById(id).subscribe(result => {
-        this.title = "Editar";
-        this.formData.setValue(result);
-      });
-    }
-    else {
-      this.title = "Adicionar";
-    }
+    this.route.params.subscribe(params => {
+      var id = params["id"];
+      if (id) {
+        this._restauranteService.getById(id).subscribe(result => {
+          this.title = "Editar";
+          this.formData.setValue(result);
+        });
+      }
+      else {
+        this.title = "Adicionar";
+      }
+    });
 
   }
 
@@ -51,9 +52,9 @@ export class RestauranteFormComponent {
     if (!fg.valid) return;
     this.spinner = true;
     this._restauranteService.submit(fg.value)
-        .subscribe(() => this.goToIndex(), () => {
-          this.spinner = false;        
-        });
+      .subscribe(() => this.goToIndex(), () => {
+        this.spinner = false;
+      });
   }
 
   goToIndex() {

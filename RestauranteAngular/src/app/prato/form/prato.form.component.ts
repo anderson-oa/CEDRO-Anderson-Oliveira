@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Prato } from '../../../domain/prato/prato';
 import { PratoService } from '../../../domain/prato/prato-service';
@@ -39,7 +39,9 @@ export class PratoFormComponent {
 
   ngOnInit(): void {
 
-    this._restauranteService.getAll().subscribe(restaurantes => this.restaurantes = restaurantes);
+    this._restauranteService.getAll().subscribe(restaurantes => {
+      this.restaurantes = restaurantes;
+    });
 
     this.formData = this.formBuilder.group({
       pratoId: [this.model.pratoId],      
@@ -48,18 +50,19 @@ export class PratoFormComponent {
       restauranteId: [this.model.restauranteId, [Validators.min(1)]]    
     });
 
-    let id = this.route.snapshot.paramMap.get('id');
-
-    if (id) {
-      this._pratoService.getById(id).subscribe(result => {
-        this.title = "Editar";        
-        this.formData.setValue(result);
-      });
-    }
-    else {
-      this.title = "Adicionar";
-    }
-
+    this.route.params.subscribe(params => {
+      var id = params["id"];
+      if (id) {
+        this._pratoService.getById(id).subscribe(result => {
+          this.title = "Editar";
+          this.formData.setValue(result);
+        });
+      }
+      else {
+        this.title = "Adicionar";
+      }
+    });
+   
   }
 
   onSubmit(fg: FormGroup) {        
