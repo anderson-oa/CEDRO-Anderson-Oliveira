@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Restaurante } from '../../../domain/restaurante/restaurante';
 import { RestauranteService } from '../../../domain/restaurante/restaurante-sevice';
+import { MessageService } from '../../../domain/message/message-service';
 
 @Component({
   selector: 'app-restaurante-form-component',
@@ -21,9 +22,10 @@ export class RestauranteFormComponent {
   public model: Restaurante = { restauranteId: 0, nome: '' };
 
   constructor(private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
-    private _restauranteService: RestauranteService) {
+    private route: ActivatedRoute,    
+    private _restauranteService: RestauranteService,
+    private _messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -52,7 +54,10 @@ export class RestauranteFormComponent {
     if (!fg.valid) return;
     this.spinner = true;
     this._restauranteService.submit(fg.value)
-      .subscribe(() => this.goToIndex(), () => {
+      .subscribe(message => {                
+        this.router.navigate(['restaurantes', {message}]);
+      }, err => {        
+        this._messageService.error(err.error);
         this.spinner = false;
       });
   }

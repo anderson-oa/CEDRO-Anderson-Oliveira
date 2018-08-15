@@ -19,7 +19,7 @@ export class RestauranteService {
   }
 
   delete(id) {
-    return this._http.delete(`${this._baseUrl}/restaurante/${id}`);
+    return this._http.delete<string>(`${this._baseUrl}/restaurante/${id}`);
   }
 
   submit(restaurante: Restaurante) {
