@@ -17,7 +17,10 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             _pratoService = pratoService;
         }
 
-
+        /// <summary>
+        /// Consultar os pratos cadastrados
+        /// </summary>
+        /// <returns>Retorna todos os pratos cadastrados</returns>
         [HttpGet]
         [Route("")]
         public IActionResult Get()
@@ -32,6 +35,11 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Consultar prato por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna um prato</returns>
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult Get(int id)
@@ -46,6 +54,22 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Adicionar prato
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Prato
+        ///     {
+        ///        "pratoId": 1,
+        ///        "nome": "Nome do prato",
+        ///        "preco":"1.00",
+        ///        "restauranteId":"2"
+        ///     }       
+        /// </remarks>
+        /// <param name="prato"></param>      
+        /// <returns>Mensagem de sucesso ou de error</returns>
         [HttpPost]
         [Route("")]
         public IActionResult Adicionar([FromBody]JObject prato)
@@ -61,6 +85,22 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualizar informações do prato
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /Prato
+        ///     {
+       ///         "pratoId": 1,
+        ///        "nome": "Nome do prato",
+        ///        "preco":"1.00",
+        ///        "restauranteId":"2"
+        ///     }       
+        /// </remarks>
+        /// <param name="prato"></param>      
+        /// <returns>Mensagem de sucesso ou de error</returns>    
         [HttpPut]
         [Route("")]
         public IActionResult Atualizar([FromBody]JObject prato)
@@ -76,6 +116,11 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletar prato por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Mensagem de sucesso ou de error</returns>     
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
