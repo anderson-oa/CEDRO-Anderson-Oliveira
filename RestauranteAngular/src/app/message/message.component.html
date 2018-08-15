@@ -1,7 +1,4 @@
-<div [ngClass]="['message', message.show]">
-  <div class="message-header">
-    <p class="is-uppercase">{{ message.title }}</p>
-    <button class="delete" aria-label="delete" (click)="message.hide()"></button>
-  </div>
-  <div class="message-body">{{ message.text }}</div>
+<div *ngFor="let message of messages" class="notification {{ cssClass(message) }}">
+  <button class="delete" (click)="remove(message)"></button>
+  {{message.text}}
 </div>

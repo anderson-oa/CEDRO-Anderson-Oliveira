@@ -7,7 +7,6 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { AppComponent } from './app.component';
 import { SpinnerComponent } from './spinner/spinner.component';
-import { MessageComponent } from './message/message.component';
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 
@@ -21,11 +20,13 @@ import { PratoFormComponent } from './prato/form/prato.form.component';
 import { PratoFilterPipe } from './prato/prato-filter.pipe';
 import { PratoService } from '../domain/prato/prato-service';
 
+import { MessageComponent } from './message/message.component';
+import { MessageService } from '../domain/message/message-service';
+
 @NgModule({
   declarations: [
     AppComponent,    
-    SpinnerComponent,
-    MessageComponent,
+    SpinnerComponent,    
     MenuComponent,
     HomeComponent,
     RestauranteComponent,    
@@ -33,7 +34,8 @@ import { PratoService } from '../domain/prato/prato-service';
     RestauranteFilterPipe,
     PratoComponent,
     PratoFormComponent,
-    PratoFilterPipe
+    PratoFilterPipe,
+    MessageComponent
   ],  
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -97,7 +99,8 @@ import { PratoService } from '../domain/prato/prato-service';
   ],
   providers: [
     RestauranteService, 
-    PratoService
+    PratoService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
