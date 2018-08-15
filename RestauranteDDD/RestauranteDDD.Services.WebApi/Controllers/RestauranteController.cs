@@ -17,6 +17,10 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             _restauranteService = restauranteService;
         }
 
+        /// <summary>
+        /// Consultar os restaurantes cadastrados
+        /// </summary>
+        /// <returns>Retorna todos os restaurantes cadastrados</returns>
         [HttpGet]
         [Route("")]
         public IActionResult Get()
@@ -31,6 +35,11 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Consultar restaurante por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna um restaurante</returns>
         [HttpGet]
         [Route("{id:int}")]
         public IActionResult Get(int id)
@@ -45,6 +54,10 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Adicionar restaurante
+        /// </summary>
+        /// <param name="restaurante"></param>        
         [HttpPost]
         [Route("")]
         public IActionResult Adicionar([FromBody]JObject restaurante)
@@ -60,6 +73,10 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Atualizar informações do restaurante
+        /// </summary>
+        /// <param name="restaurante"></param>        
         [HttpPut]
         [Route("")]
         public IActionResult Atualizar([FromBody]JObject restaurante)
@@ -75,6 +92,10 @@ namespace RestauranteDDD.Services.WebApi.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletar restaurante por id
+        /// </summary>
+        /// <param name="id"></param>
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
