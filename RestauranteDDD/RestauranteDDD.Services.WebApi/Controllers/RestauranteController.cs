@@ -57,7 +57,17 @@ namespace RestauranteDDD.Services.WebApi.Controllers
         /// <summary>
         /// Adicionar restaurante
         /// </summary>
-        /// <param name="restaurante"></param>        
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Restaurante
+        ///     {
+        ///        "restauranteId": 1,
+        ///        "nome": "Nome do restaurante"
+        ///     }       
+        /// </remarks>
+        /// <param name="restaurante"></param>      
+        /// <returns>Mensagem de sucesso ou de error</returns>
         [HttpPost]
         [Route("")]
         public IActionResult Adicionar([FromBody]JObject restaurante)
@@ -76,7 +86,17 @@ namespace RestauranteDDD.Services.WebApi.Controllers
         /// <summary>
         /// Atualizar informações do restaurante
         /// </summary>
-        /// <param name="restaurante"></param>        
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     PUT /Restaurante
+        ///     {
+        ///        "restauranteId": 1,
+        ///        "nome": "Nome do restaurante"
+        ///     }       
+        /// </remarks>
+        /// <param name="restaurante"></param>      
+        /// <returns>Mensagem de sucesso ou de error</returns>     
         [HttpPut]
         [Route("")]
         public IActionResult Atualizar([FromBody]JObject restaurante)
@@ -96,6 +116,7 @@ namespace RestauranteDDD.Services.WebApi.Controllers
         /// Deletar restaurante por id
         /// </summary>
         /// <param name="id"></param>
+        /// <returns>Mensagem de sucesso ou de error</returns>     
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

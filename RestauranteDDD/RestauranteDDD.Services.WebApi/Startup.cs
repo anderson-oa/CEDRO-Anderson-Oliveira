@@ -6,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using RestauranteDDD.Infra.CrossCutting.IoC;
 using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace RestauranteDDD.Services.WebApi
 {
@@ -53,7 +56,7 @@ namespace RestauranteDDD.Services.WebApi
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",                    
-                    Title = "Web API, Restaurante - Anderson Oliveira",
+                    Title = "Web API, CEDRO - Restaurante | Anderson Oliveira",
                     Description = "A avaliação prática é a construção de um sistema simples de restaurante.",
                     TermsOfService = "None",
                     Contact = new Contact
@@ -61,7 +64,12 @@ namespace RestauranteDDD.Services.WebApi
                         Name = "Anderson Oliveira",
                         Email = "andderson147@hotmail.com",
                     }
-                });                
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
             });
         }
 
@@ -77,11 +85,9 @@ namespace RestauranteDDD.Services.WebApi
                 app.UseHsts();
             }
 
+            app.UseStaticFiles();
             app.UseSwagger();
-            app.UseSwaggerUI(c => {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API, Restaurante - Anderson Oliveira");
-                c.RoutePrefix = string.Empty;
-            });
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API, CEDRO - Restaurante | Anderson Oliveira"));
             //app.UseCors("AllowSpecificOrigin");
             app.UseCors("AllowAll");
             app.UseHttpsRedirection();
