@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Restaurante } from '../../domain/restaurante/restaurante';
 import { RestauranteService } from '../../domain/restaurante/restaurante-sevice';
-import { MessageService } from '../../domain/message/message-service';
 
 @Component({
   selector: 'app-restaurante-component',
@@ -22,14 +20,8 @@ export class RestauranteComponent {
 
   public restaurantes: Restaurante[] = [];
 
-  constructor(private router: Router,
-    private route: ActivatedRoute,    
-    private _restauranteService: RestauranteService,
-    private _messageService: MessageService) {
-    this.route.params.subscribe(params => {
-      this.getAll();
-      if(params["message"])_messageService.success(params["message"]);
-    });    
+  constructor(private _restauranteService: RestauranteService) {
+    this.getAll();  
   }
 
   getAll() {
@@ -46,13 +38,8 @@ export class RestauranteComponent {
   delete(id: number) {
     this.close();
     this.spinner = true;
-    this._restauranteService.delete(id).subscribe(result => {
-      this.getAll();
-      this._messageService.success(result);
-    }, err =>{
-      this.spinner = false;
-      this._messageService.error(err.error);      
-    });
+    this._restauranteService.delete(id)
+        .subscribe(() => this.getAll(), () => { this.spinner = false; });
   }
 
   confirme(restaurante: Restaurante) {

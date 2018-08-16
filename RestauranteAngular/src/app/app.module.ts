@@ -20,9 +20,6 @@ import { PratoFormComponent } from './prato/form/prato.form.component';
 import { PratoFilterPipe } from './prato/prato-filter.pipe';
 import { PratoService } from '../domain/prato/prato-service';
 
-import { MessageComponent } from './message/message.component';
-import { MessageService } from '../domain/message/message-service';
-
 @NgModule({
   declarations: [
     AppComponent,    
@@ -35,7 +32,6 @@ import { MessageService } from '../domain/message/message-service';
     PratoComponent,
     PratoFormComponent,
     PratoFilterPipe,
-    MessageComponent
   ],  
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -99,8 +95,7 @@ import { MessageService } from '../domain/message/message-service';
   ],
   providers: [
     RestauranteService, 
-    PratoService,
-    MessageService
+    PratoService
   ],
   bootstrap: [AppComponent]
 })

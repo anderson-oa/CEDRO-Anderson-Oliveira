@@ -19,7 +19,7 @@ export class PratoService {
   }
 
   delete(id) {
-    return this._http.delete(`${this._baseUrl}/prato/${id}`);
+    return this._http.delete<string>(`${this._baseUrl}/prato/${id}`);
   }
 
   submit(prato: Prato) {
